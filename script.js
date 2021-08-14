@@ -1,6 +1,6 @@
 function scroller(elem, num, obj) {
-  var elems = document.querySelectorAll(elem)
-  var posNum
+  let elems = document.querySelectorAll(elem)
+  let posNum
   switch (num) {
     case '9':
       elems.forEach((element) => (element.style.top = 'calc(-46px * 5)'))
@@ -49,21 +49,19 @@ function scroller(elem, num, obj) {
   }
 }
 function getClock() {
-  var time = new Date()
+  let time = new Date()
 
-  var sec = time.getSeconds()
-  var min = time.getMinutes()
-  var hr = time.getHours()
+  let [sec, min, hr] = [time.getSeconds(), time.getMinutes(), time.getHours()]
 
-  sec < 10 ? (sec = '0' + sec) : (sec = sec)
-  min < 10 ? (min = '0' + min) : (min = min)
-  hr < 10 ? (hr = '0' + hr) : (hr = hr)
+  sec < 10 ? sec = ('0' + sec) : sec
+  min < 10 ? min = ('0' + min) : min
+  hr < 10 ? hr = ('0' + hr) : hr
 
   document.getElementById('realTime').innerHTML = `${hr} : ${min} : ${sec}`
-
-  var secArr = String(sec).split('')
-  var minArr = String(min).split('')
-  var hrArr = String(hr).split('')
+  
+  let secArr = String(sec).split('')
+  let minArr = String(min).split('')
+  let hrArr = String(hr).split('')
 
   scroller('.secFirstPos', secArr[0], 'secFirstPos')
   scroller('.secSecondPos', secArr[1], 'secSecondPos')
@@ -71,7 +69,5 @@ function getClock() {
   scroller('.minSecondPos', minArr[1], 'minSecondPos')
   scroller('.hrFirstPos', hrArr[0], 'hrFirstPos')
   scroller('.hrSecondPos', hrArr[1], 'hrSecondPos')
-  console.clear()
-  console.log(`${hrArr.join('')} : ${minArr.join('')} : ${secArr.join('')}`)
 }
 setInterval(getClock, 1000)
